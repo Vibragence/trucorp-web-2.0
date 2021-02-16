@@ -1,0 +1,23 @@
+version: "2"
+services:
+    website:
+        build: ./Website/
+        image: trucorp-web-2.0
+        ports: 
+            - "7000:80"
+        volumes:
+            - ./Website:/var/www/html/
+        links:
+            - database
+
+    database:
+        image: mysql:latest
+        ports: 
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: Trucorp
+            MYSQL_USER: UserTrucorp
+            MYSQL_PASSWORD: CorpTru123
+            MYSQL_ROOT_PASSWORD: TruCorporation111
+        volumes:
+            - ./Database:/docker-entrypoint-initdb.d
